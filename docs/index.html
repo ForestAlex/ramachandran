@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Interaktiver Plotly-Scatterplot</title>
+  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+</head>
+<body>
+  <input type="text" id="input1" placeholder="Textfeld 1">
+  <input type="text" id="input2" placeholder="Textfeld 2">
+  <select id="dropdown">
+    <option value="A">Option A</option>
+    <option value="B">Option B</option>
+  </select>
+  <input type="range" id="slider" min="10" max="100" value="50">
+  <span id="slider-value">50</span>
+  <div id="plot"></div>
+  <script>
+    // Beispiel-Daten
+    function generateData(n) {
+      let x = [], y = [];
+      for (let i = 0; i < n; i++) {
+        x.push(Math.random());
+        y.push(Math.random());
+      }
+      return {x, y};
+    }
+
+    function updatePlot(n) {
+      let data = generateData(n);
+      Plotly.newPlot('plot', [{
+        x: data.x,
+        y: data.y,
+        mode: 'markers',
+        type: 'scatter'
+      }]);
+    }
+
+    // Initialer Plot
+    updatePlot(50);
+
+    // Slider-Event
+    document.getElementById('slider').oninput = function() {
+      let val = this.value;
+      document.getElementById('slider-value').textContent = val;
+      updatePlot(val);
+    };
+
+    // Weitere Event-Listener für Inputs/Dropdowns nach Bedarf ergänzen
+  </script>
+</body>
+</html>
