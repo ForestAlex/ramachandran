@@ -2,18 +2,45 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Interaktiver Plotly-Scatterplot</title>
+  <title>Monde Plot</title>
   <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
 </head>
 <body>
-  <input type="text" id="input1" placeholder="Textfeld 1">
-  <input type="text" id="input2" placeholder="Textfeld 2">
-  <select id="dropdown">
-    <option value="A">Option A</option>
-    <option value="B">Option B</option>
-  </select>
-  <input type="range" id="slider" min="10" max="100" value="50">
-  <span id="slider-value">50</span>
+  <input type="dropdown" list="list_ncaa" name="ncaa" id="ncaa" placeholder="Amino Acid ID">
+  <datalist id="list_ncaa">
+	<option value="YRV"><option value="3WX"><option value="FTR">
+	<option value="ALC"><option value="200">
+	<option value="HRG"><option value="NLE"><option value="OIC">
+	<option value="WEH">
+	<option value="WET">
+	<option value="W4T">
+	<option value="CRO">
+	<option value="2TL">
+	<option value="DSG">
+	<option value="DSN">
+	<option value="DAL">
+	<option value="HTN">
+	<option value="HVA">
+	<option value="I2M">
+	<option value="LMQ">
+	<option value="M2S">
+	<option value="MHE">
+	<option value="DHV">
+	<option value="MND">
+	<option value="TBG">
+	<option value="TDD">
+  </datalist>
+
+  <input type="dropdown" list="list_pdb" name="pdb" id="pdb" placeholder="PDB ID">
+  <datalist id="list_pdb">
+	<option value="6XIB">
+	<option value="3Q4K">
+	<option value="5VBL">
+	<option value="8WM0">
+	<option value="8OVY">
+	<option value="2RQO">
+  </datalist>
+
   <div id="plot"></div>
   <script>
     // Beispiel-Daten
@@ -48,5 +75,8 @@
 
     // Weitere Event-Listener für Inputs/Dropdowns nach Bedarf ergänzen
   </script>
+
+  <input type="range" id="slider" min="10" max="100" value="50">
+  <span id="slider-value">50</span>
 </body>
 </html>
