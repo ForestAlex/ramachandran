@@ -123,6 +123,9 @@
         type: 'scatter'
       }]);
     }
+
+    // Initialer Plot
+    updatePlot(50);
 	  
     // Event-Listener: Slider-Event
     document.getElementById('slider').oninput = function() {
@@ -137,8 +140,6 @@
 		updatePlot(50);
 	});
 
-    // Initialer Plot
-    updatePlot(50);
   </script>
 
   <input type="range" id="slider" min="10" max="100" value="50">
