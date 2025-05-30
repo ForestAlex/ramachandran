@@ -72,11 +72,16 @@
 	<input type="checkbox" name="canonical_bg" value="VAL"> VAL
 </div>
 
+<div style="margin-top: 20px;">
 <input type="range" id="slider" min="10" max="100" value="50">
   <span id="slider-value">50</span>
+</div>
+	
+<div id="plot"></div>
 
-  <div id="plot"></div>
-  <script>
+<script>	
+document.addEventListener('DOMContentLoaded', function() {
+
     // Beispiel-Daten
     function generateData(n) {
       let x = [], y = [];
@@ -93,9 +98,10 @@
     }
 
     // Daten
-    const imgCanonicalBackground = canonicalBackground();
-    const canonicalBackgroundImages = imgCanonicalBackground.map(idx => ({
-	    source: `/images/bg${idx}.png`,
+    function canonicalBackgroundImages () {
+	const selectedBackground = canonicalBackground();
+    	return selectedBackground.map(idx => ({
+	    source: `images/bg${idx}.png`,
 	    xref: "x",
 	    yref: "y",
 	    x: 0,
@@ -106,18 +112,18 @@
 	    opacity: 0.2,
 	    layer: "below"
     }));
+    }
 
-    let layout = {
+    // Plotly-Grafik
+    function updatePlot(n) {
+      const data = generateData(n);
+      const layout = {
 	width: 600,
 	height: 600,
 	xaxis: { range: [0, 1], scaleanchor: 'y', scaleratio: 1 },
 	yaxis: { range: [0, 1] },
 	images: canonicalBackgroundImages
     };
-
-    // Plotly-Grafik
-    function updatePlot(n) {
-      let data = generateData(n);
       Plotly.newPlot('plot', [{
         x: data.x,
         y: data.y,
@@ -127,23 +133,21 @@
     }
 	
     // Initialer Plot
-    updatePlot(50);
+    let residues = parseInt(document.getElementById('slider').value, 10);
+    updatePlot(residues);
 	  
-    // Event-Listener: Slider-Event
-    document.getElementById('slider').oninput = function() {
-      let val = this.value;
-      document.getElementById('slider-value').textContent = val;
-      updatePlot(val);
-    };
+   // Slider event
+   document.getElementById('slider').addEventListener('input', function() {
+    residues = parseInt(this.value, 10);
+    document.getElementById('slider-value').textContent = this.value;
+    updatePlot(residues);
+    });
 
-    // Event-Listener: Background-Image
-    document.getElementById('canonical-checkboxes').addEventListener('change',
-	function() {
-		updatePlot(50);
-	});
-
-    // Initialer Plot
-    updatePlot(50);
+  // Checkbox event
+  document.getElementById('canonical-checkboxes').addEventListener('change', function() {
+    updatePlot(residues);
+  });
+});
   </script>
 </body>
 </html>
