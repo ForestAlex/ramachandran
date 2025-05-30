@@ -72,16 +72,11 @@
 	<input type="checkbox" name="canonical_bg" value="VAL"> VAL
 </div>
 
-<div style="margin-top: 20px;">
 <input type="range" id="slider" min="10" max="100" value="50">
   <span id="slider-value">50</span>
-</div>
-	
-<div id="plot"></div>
 
-<script>	
-document.addEventListener('DOMContentLoaded', function() {
-
+  <div id="plot"></div>
+  <script>
     // Beispiel-Daten
     function generateData(n) {
       let x = [], y = [];
@@ -96,11 +91,15 @@ document.addEventListener('DOMContentLoaded', function() {
     function canonicalBackground () {
 	return Array.from(document.querySelectorAll('input[name="canonical_bg"]:checked')).map(cb => cb.value);
     }
+    
 
-    // Daten
-    function canonicalBackgroundImages () {
-	const selectedBackground = canonicalBackground();
-    	return selectedBackground.map(idx => ({
+    // Plotly-Grafik
+    function updatePlot(n) {
+      let data = generateData(n);
+      
+      const imgCanonicalBackground = canonicalBackground();
+      console.log("Array contents:", imgCanonicalBackground);
+      const canonicalBackgroundImages = imgCanonicalBackground.map(idx => ({
 	    source: `images/bg${idx}.png`,
 	    xref: "x",
 	    yref: "y",
@@ -109,21 +108,19 @@ document.addEventListener('DOMContentLoaded', function() {
 	    sizex: 1,
 	    sizey: 1,
 	    sizing: "stretch",
-	    opacity: 0.2,
+	    opacity: 0.5,
 	    layer: "below"
-    }));
-    }
+      }));
 
-    // Plotly-Grafik
-    function updatePlot(n) {
-      const data = generateData(n);
-      const layout = {
+      let layout = {
 	width: 600,
 	height: 600,
 	xaxis: { range: [0, 1], scaleanchor: 'y', scaleratio: 1 },
 	yaxis: { range: [0, 1] },
 	images: canonicalBackgroundImages
-    };
+      };
+      
+      
       Plotly.newPlot('plot', [{
         x: data.x,
         y: data.y,
@@ -133,21 +130,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 	
     // Initialer Plot
-    let residues = parseInt(document.getElementById('slider').value, 10);
-    updatePlot(residues);
+    updatePlot(50);
 	  
-   // Slider event
-   document.getElementById('slider').addEventListener('input', function() {
-    residues = parseInt(this.value, 10);
-    document.getElementById('slider-value').textContent = this.value;
-    updatePlot(residues);
-    });
+    // Event-Listener: Slider-Event
+    document.getElementById('slider').oninput = function() {
+      let residues = this.value;
+      document.getElementById('slider-value').textContent = residues;
+      updatePlot(residues);
+    };
 
-  // Checkbox event
-  document.getElementById('canonical-checkboxes').addEventListener('change', function() {
-    updatePlot(residues);
-  });
-});
+    // Event-Listener: Background-Image
+    document.getElementById('canonical-checkboxes').addEventListener('change',
+	function() {
+	   let residues = document.getElementById('slider').value;
+      	   updatePlot(residues);
+	});
+
+    // Initialer Plot
+    updatePlot(50);
   </script>
+
+
 </body>
 </html>
