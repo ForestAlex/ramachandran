@@ -12,6 +12,41 @@
 </p>
 <p>Play around with your favourite canonical amino acid background! Then, you can choose non-canonical amino acid candidates and compare their populated regions across structures. Do they explore novel parts of the fold landscapes? As an alternative mode, you can focus on only one structure. Play around how the fold from N-terminus to C-terminus spot by spot places the amino acids in backbone folds.</p>
 
+<!-- Selection for IDs-->
+  <input type="dropdown" list="list_ncaa" name="ncaa" id="ncaa" placeholder="Amino Acid ID">
+  <datalist id="list_ncaa">
+	<option value="YRV"><option value="3WX"><option value="FTR">
+	<option value="ALC"><option value="200">
+	<option value="HRG"><option value="NLE"><option value="OIC">
+	<option value="WEH">
+	<option value="WET">
+	<option value="W4T">
+	<option value="CRO">
+	<option value="2TL">
+	<option value="DSG">
+	<option value="DSN">
+	<option value="DAL">
+	<option value="HTN">
+	<option value="HVA">
+	<option value="I2M">
+	<option value="LMQ">
+	<option value="M2S">
+	<option value="MHE">
+	<option value="DHV">
+	<option value="MND">
+	<option value="TBG">
+	<option value="TDD">
+  </datalist>
+
+  <input type="dropdown" list="list_pdb" name="pdb" id="pdb" placeholder="PDB ID">
+  <datalist id="list_pdb">
+	<option value="6XIB">
+	<option value="3Q4K">
+	<option value="5VBL">
+	<option value="8WM0">
+	<option value="8OVY">
+	<option value="2RQO">
+  </datalist>
 <!-- Checkboxes for canonical amino acids. Images to load faster.-->
 <div id="canonical-checkboxes">
 	<input type="checkbox" name="canonical_bg" value="ALL"> All amino acids
@@ -72,7 +107,7 @@
 	<option value="2RQO">
   </datalist>
 
-  <div id="plot" style="width:600px, height:600px">
+  <div id="plot">
   <script>
     // Beispiel-Daten
     function generateData(n) {
@@ -84,6 +119,35 @@
       return {x, y};
     }
 
+    // Background nach kanonischer Auswahl
+    function canonicalBackground () {
+	return Array.from(document.querySelectorAll('input[name="canonical_bg"]:checked')).map(cb => cb.value);
+    }
+
+    // Daten
+    const imgCanonicalBackground = canonicalBackground();
+    const canonicalBackgroundImages = imgCanonicalBackground.map(idx => ({
+	    source: 'images/bg${idx}.png',
+	    xref: "x",
+	    yref: "y",
+	    x: 0,
+	    y: 1,
+	    sizex: 1,
+	    sizey: 1,
+	    sizing: "stretch",
+	    opacity: 0.2,
+	    layer: "below"
+    }));
+
+    let layout = {
+	width: 600,
+	height: 600,
+	xaxis: { range: [0, 1], scaleanchor: 'y', scaleratio: 1 },
+	yaxis: { range: [0, 1] },
+	images: canonicalBackgroundImages
+    };
+
+    // Plotly-Grafik
     function updatePlot(n) {
       let data = generateData(n);
       Plotly.newPlot('plot', [{
@@ -91,20 +155,24 @@
         y: data.y,
         mode: 'markers',
         type: 'scatter'
-      }]);
+      }], layout);
     }
-
-    // Initialer Plot
-    updatePlot(50);
-
-    // Slider-Event
+	  
+    // Event-Listener: Slider-Event
     document.getElementById('slider').oninput = function() {
       let val = this.value;
       document.getElementById('slider-value').textContent = val;
       updatePlot(val);
     };
 
-    // Weitere Event-Listener für Inputs/Dropdowns nach Bedarf ergänzen
+    // Event-Listener: Background-Image
+    document.getElementById('canonical-checkboxes').addEventListener('change',
+	function() {
+		updatePlot(50);
+	});
+
+    // Initialer Plot
+    updatePlot(50);
   </script>
 
   <input type="range" id="slider" min="10" max="100" value="50">
