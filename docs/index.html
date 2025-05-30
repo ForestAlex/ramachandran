@@ -107,7 +107,7 @@
 	<option value="2RQO">
   </datalist>
 
-  <div id="plot">
+  <div id="plot"></div>
   <script>
     // Beispiel-Daten
     function generateData(n) {
@@ -127,7 +127,7 @@
     // Daten
     const imgCanonicalBackground = canonicalBackground();
     const canonicalBackgroundImages = imgCanonicalBackground.map(idx => ({
-	    source: 'images/bg${idx}.png',
+	    source: `images/bg${idx}.png`,
 	    xref: "x",
 	    yref: "y",
 	    x: 0,
@@ -177,6 +177,5 @@
 
   <input type="range" id="slider" min="10" max="100" value="50">
   <span id="slider-value">50</span>
-</div>
 </body>
 </html>
