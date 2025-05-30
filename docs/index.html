@@ -3,14 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>MondeT Plot</title>
-
-	<h1>MondeT Plot </h1>
+</head>
+	
+<body>
+<script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+<h1>MondeT Plot </h1>
  <p>"Mond" is the German equivalent to the meaning of the surname Ramachandran. The Ramachandran plot translates to moon plot. The dihedral angels ϕ (phi) vs. ψ (psi), which are free angles of rotation of an amino acid in a protein backbone, can be plotted in a Ramachandran plot. The peptide bond angle w (omega) is restricted to mostly 180° due to the partial double-bond nature of the peptide connection. Three regions in the Ramachandran are often populated: The top left with β-strands and sheets, the bottom left with left-handed α-helices and the right middle with right-handed α-helices. The β-population is dominated by electrostatic forces, while the α-regions are preferred due to sterical benefit.    
 </p>
 <p>Play around with your favourite canonical amino acid background! Then, you can choose non-canonical amino acid candidates and compare their populated regions across structures. Do they explore novel parts of the fold landscapes? As an alternative mode, you can focus on only one structure. Play around how the fold from N-terminus to C-terminus spot by spot places the amino acids in backbone folds.</p>
-  <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
-</head>
-<body>
+
+<!-- Checkboxes for canonical amino acids. Images to load faster.-->
+<div id="canonical-checkboxes">
+	<input type="checkbox" name="canonical_bg" value="ALL"> All amino acids
+	<input type="checkbox" name="canonical_bg" value="ALA"> ALA
+	<input type="checkbox" name="canonical_bg" value="ARG"> ARG
+	<input type="checkbox" name="canonical_bg" value="ASN"> ASN
+	<input type="checkbox" name="canonical_bg" value="ASP"> ASP
+	<input type="checkbox" name="canonical_bg" value="CYS"> CYS
+	<input type="checkbox" name="canonical_bg" value="GLN"> GLN
+	<input type="checkbox" name="canonical_bg" value="GLU"> GLU
+	<input type="checkbox" name="canonical_bg" value="GLY"> GLY
+	<input type="checkbox" name="canonical_bg" value="HIS"> HIS
+	<input type="checkbox" name="canonical_bg" value="ILE"> ILE
+	<input type="checkbox" name="canonical_bg" value="LEU"> LEU
+	<input type="checkbox" name="canonical_bg" value="LYS"> LYS
+	<input type="checkbox" name="canonical_bg" value="MET"> MET
+	<input type="checkbox" name="canonical_bg" value="PHE"> PHE
+	<input type="checkbox" name="canonical_bg" value="PRO"> PRO
+	<input type="checkbox" name="canonical_bg" value="SER"> SER
+	<input type="checkbox" name="canonical_bg" value="THR"> THR
+	<input type="checkbox" name="canonical_bg" value="TYR"> TYR
+	<input type="checkbox" name="canonical_bg" value="TRP"> TRP
+	<input type="checkbox" name="canonical_bg" value="VAL"> VAL
+</div>
+
   <input type="dropdown" list="list_ncaa" name="ncaa" id="ncaa" placeholder="Amino Acid ID">
   <datalist id="list_ncaa">
 	<option value="YRV"><option value="3WX"><option value="FTR">
@@ -46,7 +72,7 @@
 	<option value="2RQO">
   </datalist>
 
-  <div id="plot"></div>
+  <div id="plot" style="width:600px, height:600px">
   <script>
     // Beispiel-Daten
     function generateData(n) {
@@ -83,5 +109,6 @@
 
   <input type="range" id="slider" min="10" max="100" value="50">
   <span id="slider-value">50</span>
+</div>
 </body>
 </html>
