@@ -72,40 +72,6 @@
 	<input type="checkbox" name="canonical_bg" value="VAL"> VAL
 </div>
 
-  <input type="dropdown" list="list_ncaa" name="ncaa" id="ncaa" placeholder="Amino Acid ID">
-  <datalist id="list_ncaa">
-	<option value="YRV"><option value="3WX"><option value="FTR">
-	<option value="ALC"><option value="200">
-	<option value="HRG"><option value="NLE"><option value="OIC">
-	<option value="WEH">
-	<option value="WET">
-	<option value="W4T">
-	<option value="CRO">
-	<option value="2TL">
-	<option value="DSG">
-	<option value="DSN">
-	<option value="DAL">
-	<option value="HTN">
-	<option value="HVA">
-	<option value="I2M">
-	<option value="LMQ">
-	<option value="M2S">
-	<option value="MHE">
-	<option value="DHV">
-	<option value="MND">
-	<option value="TBG">
-	<option value="TDD">
-  </datalist>
-
-  <input type="dropdown" list="list_pdb" name="pdb" id="pdb" placeholder="PDB ID">
-  <datalist id="list_pdb">
-	<option value="6XIB">
-	<option value="3Q4K">
-	<option value="5VBL">
-	<option value="8WM0">
-	<option value="8OVY">
-	<option value="2RQO">
-  </datalist>
 
   <div id="plot"></div>
   <script>
@@ -155,7 +121,7 @@
         y: data.y,
         mode: 'markers',
         type: 'scatter'
-      }], layout);
+      }]);
     }
 	  
     // Event-Listener: Slider-Event
