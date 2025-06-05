@@ -148,7 +148,7 @@
     slider.max = phi.length;
        
     slider.addEventListener('input', function() {
-     const residue_n = parseInt(this.value, 1);
+     let residue_n = parseInt(this.value, 1);
         sliderValue.textContent = residue_n;
         updatePlot(residue_n);
      };
@@ -157,8 +157,8 @@
     // Event-Listener: Background-Image
     document.getElementById('canonical-checkboxes').addEventListener('change',
 	function() {
-	   let residue_n = document.getElementById('slider').value;
-      	   updatePlot(residue_n);
+	   let residues = document.getElementById('slider').value;
+      	   updatePlot(residues);
 	});
 
     // Initialer Plot
