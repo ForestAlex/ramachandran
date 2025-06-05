@@ -115,7 +115,7 @@
 	    sizex: 1,
 	    sizey: 1,
 	    sizing: "stretch",
-	    opacity: 0.5,
+	    opacity: 0.9,
 	    layer: "below"
       }));
 
@@ -151,7 +151,7 @@
     document.getElementById('slider').addEventListener('input',
         function () {
            let residue_n = document.getElementById('slider').value;
-	   sliderValue.textContext = residue_n;
+	   sliderValue.textContent = residue_n;
            updatePlot(residue_n);
         });
 
