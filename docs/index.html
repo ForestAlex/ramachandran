@@ -72,8 +72,8 @@
 	<input type="checkbox" name="canonical_bg" value="VAL"> VAL
 </div>
 
-<input type="range" id="slider" min="10" max="100" value="50">
-  <span id="slider-value">50</span>
+<input type="range" id="slider">
+  <span id="slider-value">1</span>
 
   <div id="plot"></div>
   <script>
@@ -140,7 +140,7 @@
     }
 	
     // Initialer Plot
-    updatePlot(50);
+    updatePlot(2);
 	  
     // Event-Listener: Slider-Event
     const slider = document.getElementById('slider');
@@ -162,9 +162,6 @@
 	   let residues = document.getElementById('slider').value;
       	   updatePlot(residues);
 	});
-
-      // Initialer Plot
-    updatePlot(50);
   </script>
 
 
