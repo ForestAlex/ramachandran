@@ -145,23 +145,25 @@
     // Event-Listener: Slider-Event
     const slider = document.getElementById('slider');
     const sliderValue = document.getElementById('slider-value');
-    slider.max = phi.length;
-       
-    slider.addEventListener('input', function() {
-     let residue_n = parseInt(this.value, 1);
-        sliderValue.textContent = residue_n;
-        updatePlot(residue_n);
-     };
+    slider.min = 0;
+    slider.max = 118;
 
-	  
+    document.getElementById('slider').addEventListener('input',
+        function () {
+           let residue_n = document.getElementById('slider').value;
+	   sliderValue.textContext = residue_n;
+           updatePlot(residue_n);
+        });
+
+
     // Event-Listener: Background-Image
-    document.getElementById('canonical-checkboxes').addEventListener('change',
+    document.getElementById('canonical-checkboxes').addEventListener('input',
 	function() {
 	   let residues = document.getElementById('slider').value;
       	   updatePlot(residues);
 	});
 
-    // Initialer Plot
+      // Initialer Plot
     updatePlot(50);
   </script>
 
