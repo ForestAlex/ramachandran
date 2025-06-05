@@ -146,9 +146,9 @@
     const slider = document.getElementById('slider');
     const sliderValue = document.getElementById('slider-value');
     slider.max = phi.length;
-
-    slider.oninput = function() {
-        const residue_n = parseInt(this.value, 1);
+       
+    slider.addEventListener('input', function() {
+     const residue_n = parseInt(this.value, 1);
         sliderValue.textContent = residue_n;
         updatePlot(residue_n);
      };
@@ -157,8 +157,8 @@
     // Event-Listener: Background-Image
     document.getElementById('canonical-checkboxes').addEventListener('change',
 	function() {
-	   let residues = document.getElementById('slider').value;
-      	   updatePlot(residues);
+	   let residue_n = document.getElementById('slider').value;
+      	   updatePlot(residue_n);
 	});
 
     // Initialer Plot
